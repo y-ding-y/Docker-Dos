@@ -1,0 +1,43 @@
+Microsoft Windows [Version 10.0.19042.1052]
+(c) Microsoft Corporation. All rights reserved.
+
+  
+C:\Users\y.ding>docker exec -it nginx-test /bin/hasn
+OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "/bin/hasn": stat /bin/hasn: no such file or directory: unknown
+ 
+C:\Users\y.ding>docker run --name nginx-test -p 8085:80 -d nginx
+77c854695b875073dfd5a30e41fad7c56a820e2169858f707f3e51783e7e4f9a
+
+  
+C:\Users\y.ding>docker stop nginx-test
+nginx-test
+
+C:\Users\y.ding>docker cp nginx-test  E:\antEf2\dist:/usr/share/nginx/html
+must specify at least one container source
+
+C:\Users\y.ding>docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS                      PORTS      NAMES
+77c854695b87   nginx          "/docker-entrypoint.…"   4 minutes ago   Exited (0) 24 seconds ago              nginx-test
+9a772946bf17   ubuntu:12.04   "/bin/bash"              20 hours ago    Up 20 hours                            ubuntu-test
+a45e8286b073   php:5.6-fpm    "docker-php-entrypoi…"   2 days ago      Up 23 hours                 9000/tcp   php-test
+bed9cb7f0f37   node           "docker-entrypoint.s…"   3 days ago      Up 23 hours                            node-test
+
+C:\Users\y.ding>docker cp E:\antEf2\dist nginx:/usr/share/nginx/html
+Error: No such container:path: nginx:\usr\share\nginx
+
+C:\Users\y.ding>docker cp E:\antEf2\dist nginx-test:/usr/share/nginx/html
+
+C:\Users\y.ding>docker start nginx-test
+nginx-test
+
+C:\Users\y.ding>docker exec -it nginx-test /bin/bash
+root@77c854695b87:/# cd usr/share
+root@77c854695b87:/usr/share# cd nginx
+root@77c854695b87:/usr/share/nginx# cd html
+root@77c854695b87:/usr/share/nginx/html# ls
+50x.html  dist  index.html
+root@77c854695b87:/usr/share/nginx/html# exit
+exit
+
+C:\Users\y.ding>
+C:\Users\y.ding>
